@@ -24,7 +24,5 @@ namespace Warriors
         public bool IsAlive => Health > 0;
         public void TakeDamage(IWarrior attacker);
         public void DealDamage(IWarrior target);
-
-
     }
 }

@@ -9,9 +9,7 @@ namespace Warriors
     public class Knight : IWarrior
     {
         public int Attack { get; private set; } = 7;
-
         public int Health { get; private set; } = 50;
-
         public void TakeDamage(IWarrior attacker)
         {
             Health -= attacker.Attack;
@@ -20,8 +18,6 @@ namespace Warriors
         public void DealDamage(IWarrior target)
         {
             target.TakeDamage(this);
-        }
-
-        
+        }  
     }
 }

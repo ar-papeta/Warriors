@@ -18,7 +18,6 @@ namespace Warriors
         /// </value>
         public int Attack {  get; private set; } = 5;
 
-
         public void TakeDamage(IWarrior attacker)
         {
             Health -= attacker.Attack;
@@ -28,8 +27,5 @@ namespace Warriors
         {
             target.TakeDamage(this);
         }
-
-        
-
     }
 }

@@ -28,6 +28,7 @@ namespace Warriors
                 }
                 round++;
             }
+
             return first.IsAlive;
         }
     }
