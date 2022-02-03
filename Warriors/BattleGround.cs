@@ -31,5 +31,14 @@ namespace Warriors
 
             return first.IsAlive;
         }
+
+        public static bool Fight(Army firstArmy, Army secondArmy)
+        {
+            while (firstArmy.IsAlive && secondArmy.IsAlive)
+            {
+                Fight(firstArmy.TakeFirstAlive(), secondArmy.TakeFirstAlive());
+            }
+            return firstArmy.IsAlive;
+        }
     }
 }
