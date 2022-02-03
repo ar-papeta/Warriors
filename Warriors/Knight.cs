@@ -6,18 +6,8 @@ using System.Threading.Tasks;
 
 namespace Warriors
 {
-    public class Knight : IWarrior
+    public class Knight : Warrior
     {
-        public int Attack { get; private set; } = 7;
-        public int Health { get; private set; } = 50;
-        public void TakeDamage(IWarrior attacker)
-        {
-            Health -= attacker.Attack;
-        }
-
-        public void DealDamage(IWarrior target)
-        {
-            target.TakeDamage(this);
-        }  
+        public override int Attack { get; set; } = 7;
     }
 }

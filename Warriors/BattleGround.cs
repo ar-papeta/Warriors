@@ -8,7 +8,7 @@ namespace Warriors
 {
     public static class BattleGround
     {
-        public static bool Fight(IWarrior first, IWarrior second)
+        public static bool Fight(Warrior first, Warrior second)
         {
             if (first is null)
                 throw new ArgumentNullException(nameof(first), "Warrior can not be null");

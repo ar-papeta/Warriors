@@ -6,24 +6,29 @@ using System.Threading.Tasks;
 
 namespace Warriors
 {
-    public class Warrior : IWarrior
+    public class Warrior
     {
         /// <value>
-        /// Warrior's current health points
+        /// Warrior's base health points getter
         /// </value>
-        public int Health { get; private set; } = 50;
+        public virtual int Health { get; set; } = 50;
 
         /// <value>
-        /// Warrior's attack damage
+        /// Warrior's base attack damage getter
         /// </value>
-        public int Attack {  get; private set; } = 5;
+        public virtual int Attack { get; set; } = 5;
 
-        public void TakeDamage(IWarrior attacker)
+        /// <value>
+        /// If warrior's HP is greater than 0 return true otherwise false
+        /// </value>
+        public bool IsAlive => Health > 0;
+
+        public virtual void TakeDamage(Warrior attacker)
         {
             Health -= attacker.Attack;
         }
 
-        public void DealDamage(IWarrior target)
+        public virtual void DealDamage(Warrior target)
         {
             target.TakeDamage(this);
         }
