@@ -6,7 +6,7 @@ namespace Warriors
     {
         static void Main(string[] args)
         {
-            
+
         }
     }
 }
