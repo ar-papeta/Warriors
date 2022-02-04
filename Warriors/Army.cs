@@ -9,8 +9,11 @@ namespace Warriors
     public class Army
     {
         private readonly List<Warrior> _army;
-        public bool IsAlive => AliveUnitsCount > 0;
+
+        public bool IsAlive => AliveUnitsCount > 0; 
+
         public int AliveUnitsCount => _army.Count(w => w.IsAlive);
+
         public Army()
         {
             _army = new();
@@ -23,26 +26,11 @@ namespace Warriors
             return _army.FirstOrDefault(w => w.IsAlive);
         }
 
-        private void AddUnit(UnitType type)
-        {
-            switch (type)
-            {
-                case UnitType.Warrior:
-                    _army.Add(new Warrior());
-                    break;
-                case UnitType.Knight:
-                    _army.Add(new Knight());
-                    break;
-                default:
-                    throw new ArgumentException($"Unknown type of warrior: {type}");
-            }
-        }
-
-        public void AddUnits(UnitType type, int count)
+        public void AddUnits<T>(int count) where T : Warrior, new()
         {
             while (count-- > 0)
             {
-                AddUnit(type);
+                _army.Add(new T());
             }
         }
     }

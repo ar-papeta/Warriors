@@ -22,36 +22,37 @@ namespace Warriors.Tests
 
     class ArmyTestData : IEnumerable<object[]>
     {
-        private static readonly Army army1 = new();
-        private static readonly Army army2 = new();
-        private static readonly Army army3 = new();
-        private static readonly Army army4 = new();
-        private static readonly Army army5 = new();
-        private static readonly Army army6 = new();
-        private static readonly Army army7 = new();
-        private static readonly Army army8 = new();
-        private static readonly Army army9 = new();
-        private static readonly Army army10 = new();
+        private readonly Army army1 = new();
+        private readonly Army army2 = new();
+        private readonly Army army3 = new();
+        private readonly Army army4 = new();
+        private readonly Army army5 = new();
+        private readonly Army army6 = new();
+        private readonly Army army7 = new();
+        private readonly Army army8 = new();
+        private readonly Army army9 = new();
+        private readonly Army army10 = new();
 
-        static ArmyTestData()
+        public ArmyTestData()
         {
-            army1.AddUnits(UnitType.Knight, 10);
-            army1.AddUnits(UnitType.Warrior, 5);
-            army2.AddUnits(UnitType.Knight, 10);
-            army2.AddUnits(UnitType.Warrior, 5);
+            army1.AddUnits<Knight>(10);
+            army1.AddUnits<Warrior>(5);
+            army2.AddUnits<Knight>(10);
+            army2.AddUnits<Warrior>(5);
 
-            army3.AddUnits(UnitType.Warrior, 9);
-            army4.AddUnits(UnitType.Warrior, 10);
+            army3.AddUnits<Warrior>(9);
+            army4.AddUnits<Warrior>(10);
 
-            army5.AddUnits(UnitType.Warrior, 10);
-            army6.AddUnits(UnitType.Warrior, 11);
+            army5.AddUnits<Warrior>(10);
+            army6.AddUnits<Warrior>(11);
 
-            army7.AddUnits(UnitType.Knight, 8);
-            army8.AddUnits(UnitType.Knight, 9);
+            army7.AddUnits<Knight>(8);
+            army8.AddUnits<Knight>(9);
 
-            army9.AddUnits(UnitType.Knight, 7);
-            army10.AddUnits(UnitType.Knight, 8);
+            army9.AddUnits<Knight>(7);
+            army10.AddUnits<Knight>(8);
         }
+
         public IEnumerator<object[]> GetEnumerator()
         {
             yield return new object[] { army1, army2, true };

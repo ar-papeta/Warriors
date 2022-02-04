@@ -38,6 +38,7 @@ namespace Warriors
             {
                 Fight(firstArmy.TakeFirstAlive(), secondArmy.TakeFirstAlive());
             }
+
             return firstArmy.IsAlive;
         }
     }
