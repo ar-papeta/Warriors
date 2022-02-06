@@ -8,6 +8,6 @@ namespace Warriors
 {
     public class Knight : Warrior
     {
-        public override int Attack { get; set; } = 7;
+        public override int Attack { get; protected set; } = 7;
     }
 }
