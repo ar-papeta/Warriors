@@ -8,6 +8,9 @@ namespace Warriors
 {
     public class Knight : Warrior
     {
-        public override int Attack { get; protected set; } = 7;
+        public Knight()
+        {
+            Attack = 7;
+        }
     }
 }

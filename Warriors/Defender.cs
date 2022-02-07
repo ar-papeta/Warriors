@@ -8,10 +8,11 @@ namespace Warriors
 {
     public class Defender : Warrior
     {
-        public override int  Defense { get; protected set; } = 2;
-
-        public override int Health { get; protected set; } = 60;
-
-        public override int Attack { get; protected set; } = 3;
+        public Defender()
+        {
+            Defense = 2;
+            Health = 60;
+            Attack = 3;
+        }
     }
 }

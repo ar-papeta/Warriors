@@ -11,17 +11,17 @@ namespace Warriors
         /// <value>
         /// Warrior's base health points 
         /// </value>
-        public virtual int Health { get; protected set; } = 50;
+        public int Health { get; protected set; } = 50;
 
         /// <value>
         /// Warrior's base attack damage 
         /// </value>
-        public virtual int Attack { get; protected set; } = 5;
+        public int Attack { get; protected set; } = 5;
 
         /// <value>
         /// Warrior's base defense 
         /// </value>
-        public virtual int Defense { get; protected set; } = 0;
+        public int Defense { get; protected set; } = 0;
 
         /// <value>
         /// If warrior's HP is greater than 0 return true otherwise false
