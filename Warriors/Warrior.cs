@@ -8,6 +8,7 @@ namespace Warriors
 {
     public class Warrior
     {
+        
         /// <value>
         /// Warrior's base health points 
         /// </value>
@@ -19,20 +20,14 @@ namespace Warriors
         public int Attack { get; protected set; } = 5;
 
         /// <value>
-        /// Warrior's base defense 
-        /// </value>
-        public int Defense { get; protected set; } = 0;
-
-        /// <value>
         /// If warrior's HP is greater than 0 return true otherwise false
         /// </value>
         public bool IsAlive => Health > 0;
 
-        private int DamageTaken(int incomingDamage) => Math.Clamp(incomingDamage - Defense, 0, incomingDamage);
-        
         public virtual int TakeDamage(Warrior attacker)
         {
-            var realDamage = DamageTaken(attacker.Attack);
+            var realDamage = attacker.Attack;
+            realDamage = (Health < realDamage) ? Health : realDamage;
             Health -= realDamage;
 
             return realDamage;
