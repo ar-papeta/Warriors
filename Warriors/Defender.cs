@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Warriors
 {
-    public class Knight : Warrior
+    public class Defender : Warrior
     {
-        public Knight()
+        public Defender()
         {
-            Attack = 7;
+            Defense = 2;
+            Health = 60;
+            Attack = 3;
         }
     }
 }

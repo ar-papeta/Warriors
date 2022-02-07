@@ -9,25 +9,35 @@ namespace Warriors
     public class Warrior
     {
         /// <value>
-        /// Warrior's base health points getter
+        /// Warrior's base health points 
         /// </value>
-        public virtual int Health { get; set; } = 50;
+        public int Health { get; protected set; } = 50;
 
         /// <value>
-        /// Warrior's base attack damage getter
+        /// Warrior's base attack damage 
         /// </value>
-        public virtual int Attack { get; set; } = 5;
+        public int Attack { get; protected set; } = 5;
+
+        /// <value>
+        /// Warrior's base defense 
+        /// </value>
+        public int Defense { get; protected set; } = 0;
 
         /// <value>
         /// If warrior's HP is greater than 0 return true otherwise false
         /// </value>
         public bool IsAlive => Health > 0;
 
-        public virtual void TakeDamage(Warrior attacker)
+        private int DamageTaken(int incomingDamage) => Math.Clamp(incomingDamage - Defense, 0, incomingDamage);
+        
+        public virtual int TakeDamage(Warrior attacker)
         {
-            Health -= attacker.Attack;
-        }
+            var realDamage = DamageTaken(attacker.Attack);
+            Health -= realDamage;
 
+            return realDamage;
+        }
+        
         public virtual void DealDamage(Warrior target)
         {
             target.TakeDamage(this);
