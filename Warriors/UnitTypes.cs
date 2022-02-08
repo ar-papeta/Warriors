@@ -10,5 +10,7 @@ namespace Warriors
     {
         Warrior,
         Knight,
+        Defender,
+        Vampire,
     }
 }

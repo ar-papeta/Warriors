@@ -16,7 +16,7 @@ namespace Warriors.Tests
         public void Defender_Defense_IsCorrect()
         {
             var expected = 2;
-            Warrior defender = new Defender();
+            Defender defender = new ();
             var actual = defender.Defense;
 
             Assert.Equal(expected, actual);

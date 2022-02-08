@@ -12,7 +12,7 @@ namespace Warriors.Tests
     {
         [Theory]
         [ClassData(typeof(ArmyTestData))]
-        public void ArmyVsArmy_Fight_ReturnCorrectValue(Army army1, Army army2, bool expected)
+        public void Fight_ArmyVsArmy_ReturnCorrectValue(Army army1, Army army2, bool expected)
         {
             var actual = BattleGround.Fight(army1, army2);
 
@@ -40,6 +40,14 @@ namespace Warriors.Tests
         private readonly Army army16 = new();
         private readonly Army army17 = new();
         private readonly Army army18 = new();
+        private readonly Army army19 = new();
+        private readonly Army army20 = new();
+        private readonly Army army21 = new();
+        private readonly Army army22 = new();
+        private readonly Army army23 = new();
+        private readonly Army army24 = new();
+        private readonly Army army25 = new();
+        private readonly Army army26 = new();
 
         public ArmyTestData()
         {
@@ -79,6 +87,34 @@ namespace Warriors.Tests
             army17.AddUnits<Warrior>(1);
             army17.AddUnits<Defender>(1);
             army18.AddUnits<Warrior>(5);
+
+            army19.AddUnits<Defender>(5);
+            army19.AddUnits<Vampire>(6);
+            army19.AddUnits<Warrior>(7);
+            army20.AddUnits<Warrior>(6);
+            army20.AddUnits<Defender>(6);
+            army20.AddUnits<Vampire>(6);
+
+            army21.AddUnits<Defender>(2);
+            army21.AddUnits<Vampire>(3);
+            army21.AddUnits<Warrior>(4);
+            army22.AddUnits<Warrior>(4);
+            army22.AddUnits<Defender>(4);
+            army22.AddUnits<Vampire>(3);
+
+            army23.AddUnits<Defender>(11);
+            army23.AddUnits<Vampire>(3);
+            army23.AddUnits<Warrior>(4);
+            army24.AddUnits<Warrior>(4);
+            army24.AddUnits<Defender>(4);
+            army24.AddUnits<Vampire>(13);
+
+            army25.AddUnits<Defender>(9);
+            army25.AddUnits<Vampire>(3);
+            army25.AddUnits<Warrior>(8);
+            army26.AddUnits<Warrior>(4);
+            army26.AddUnits<Defender>(4);
+            army26.AddUnits<Vampire>(13);
         }
         public IEnumerator<object[]> GetEnumerator()
         {
@@ -91,6 +127,10 @@ namespace Warriors.Tests
             yield return new object[] { army13, army14, true };
             yield return new object[] { army15, army16, true };
             yield return new object[] { army17, army18, false };
+            yield return new object[] { army19, army20, false };
+            yield return new object[] { army21, army22, false };
+            yield return new object[] { army23, army24, true };
+            yield return new object[] { army25, army26, true };
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
