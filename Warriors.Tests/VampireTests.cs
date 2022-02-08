@@ -44,8 +44,6 @@ namespace Warriors.Tests
             };
         }
 
-        
-
         [Theory]
         [MemberData(nameof(FightData))]
         public void Fight_VampireVsEnemy_ReturnCorrectValue(Warrior first, Warrior second, bool expected)
@@ -63,6 +61,5 @@ namespace Warriors.Tests
             new object[] { new Knight(), new Vampire(), true },
             new object[] { new Vampire(), new Knight(), false },
         };
-
     }
 }

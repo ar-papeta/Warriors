@@ -27,7 +27,7 @@ namespace Warriors
         public virtual int TakeDamage(Warrior attacker)
         {
             var realDamage = attacker.Attack;
-            realDamage = (Health < realDamage) ? Health : realDamage;
+            realDamage = Health < realDamage ? Health : realDamage;
             Health -= realDamage;
 
             return realDamage;

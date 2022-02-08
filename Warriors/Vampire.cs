@@ -23,10 +23,12 @@ namespace Warriors
         public override void DealDamage(Warrior target)
         {
             var actualDamage = target.TakeDamage(this);
-            int VampirismHeal = actualDamage * Vampirism / 100;
-            Health += VampirismHeal;
+            int vampirismHeal = actualDamage * Vampirism / 100;
+            Health += vampirismHeal;
             if (Health > _startHp)
+            {
                 Health = _startHp;
+            }    
         }
     }
 }
