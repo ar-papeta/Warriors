@@ -10,9 +10,11 @@ namespace Warriors
     {
         private readonly List<Warrior> _army;
 
-        public bool IsAlive => AliveUnitsCount > 0; 
+        public bool IsAlive => AliveUnitsCount > 0;
 
-        public int AliveUnitsCount => _army.Count(w => w.IsAlive);
+        public int ArmyHp => _army.Sum(x => x.Health);
+
+        private int AliveUnitsCount => _army.Count(w => w.IsAlive);
 
         public Army()
         {
@@ -26,11 +28,32 @@ namespace Warriors
             return _army.FirstOrDefault(w => w.IsAlive);
         }
 
+        public Warrior TakeSecondAlive()
+        {
+            return _army.Where(w => w.IsAlive).Skip(1).FirstOrDefault();
+        }
+
         public void AddUnits<T>(int count) where T : Warrior, new()
         {
             while (count-- > 0)
             {
                 _army.Add(new T());
+            }
+        }
+        public void Attack(Army enemy)
+        {
+            var unit = TakeFirstAlive();
+            var enemyUnit = enemy.TakeFirstAlive();
+
+            var damageToFirstEnemy = unit.DealDamage(enemyUnit, unit.Attack);
+
+            if (unit is Lancer)
+            {
+                var secondEnemy = enemyUnit.IsAlive ? enemy.TakeSecondAlive() : enemy.TakeFirstAlive();
+                if (secondEnemy is not null)
+                {
+                    unit.DealDamage(secondEnemy, damageToFirstEnemy / 2);
+                }
             }
         }
     }

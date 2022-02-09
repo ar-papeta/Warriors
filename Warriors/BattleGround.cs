@@ -20,11 +20,11 @@ namespace Warriors
             {
                 if (round % 2 != 0)
                 {
-                    first.DealDamage(second);
+                    first.DealDamage(second, first.Attack);
                 }
                 else
                 {
-                    second.DealDamage(first);
+                    second.DealDamage(first, second.Attack);
                 }
                 round++;
             }
@@ -36,9 +36,23 @@ namespace Warriors
         {
             while (firstArmy.IsAlive && secondArmy.IsAlive)
             {
-                Fight(firstArmy.TakeFirstAlive(), secondArmy.TakeFirstAlive());
-            }
+                var firstUnit = firstArmy.TakeFirstAlive();
+                var secondUnit = secondArmy.TakeFirstAlive();
 
+                int round = 1;
+                while (firstUnit.IsAlive && secondUnit.IsAlive)
+                {
+                    if (round % 2 != 0)
+                    {
+                        firstArmy.Attack(secondArmy);
+                    }
+                    else
+                    {
+                        secondArmy.Attack(firstArmy);
+                    }
+                    round++;
+                }
+            }
             return firstArmy.IsAlive;
         }
     }

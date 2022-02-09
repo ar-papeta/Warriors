@@ -18,7 +18,7 @@ namespace Warriors.Tests
         public void Fight_VampireVsEnemy_CorrectVampirism(Warrior vampire, Warrior other, int expected)
         {
             var startHp = vampire.Health;
-            vampire.DealDamage(other);
+            vampire.DealDamage(other, vampire.Attack);
             var actual = vampire.Health - startHp;
 
             Assert.Equal(expected, actual);
@@ -28,8 +28,7 @@ namespace Warriors.Tests
             Warrior vampireFullHp = new Vampire();
 
             Warrior vampire = new Vampire();
-            vampire.TakeDamage(new Warrior());
-            vampire.TakeDamage(new Warrior());
+            vampire.TakeDamage(20);
 
             Warrior defender = new Defender();
             Warrior warrior = new();

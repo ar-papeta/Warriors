@@ -24,18 +24,17 @@ namespace Warriors
         /// </value>
         public bool IsAlive => Health > 0;
 
-        public virtual int TakeDamage(Warrior attacker)
+        public virtual int TakeDamage(int damage)
         {
-            var realDamage = attacker.Attack;
-            realDamage = Health < realDamage ? Health : realDamage;
-            Health -= realDamage;
+            damage = Health < damage ? Health : damage;
+            Health -= damage;
 
-            return realDamage;
+            return damage;
         }
         
-        public virtual void DealDamage(Warrior target)
+        public virtual int DealDamage(Warrior target, int damage)
         {
-            target.TakeDamage(this);
+            return target.TakeDamage(damage);
         }
     }
 }

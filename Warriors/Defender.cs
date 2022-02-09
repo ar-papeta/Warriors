@@ -22,18 +22,18 @@ namespace Warriors
 
         private int DamageTaken(int incomingDamage) => Math.Clamp(incomingDamage - Defense, 0, incomingDamage);
 
-        public override int TakeDamage(Warrior attacker)
+        public override int TakeDamage(int damage)
         {
-            var realDamage = DamageTaken(attacker.Attack);
+            var realDamage = DamageTaken(damage);
             realDamage = (Health < realDamage) ? Health : realDamage;
             Health -= realDamage;
 
             return realDamage;
         }
 
-        public override void DealDamage(Warrior target)
+        public override int DealDamage(Warrior target, int damage)
         {
-            target.TakeDamage(this);
+           return target.TakeDamage(damage);
         }
     }
 }
