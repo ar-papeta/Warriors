@@ -48,6 +48,10 @@ namespace Warriors.Tests
         private readonly Army army24 = new();
         private readonly Army army25 = new();
         private readonly Army army26 = new();
+        private readonly Army army27 = new();
+        private readonly Army army28 = new();
+        private readonly Army army29 = new();
+        private readonly Army army30 = new();
 
         public ArmyTestData()
         {
@@ -115,6 +119,24 @@ namespace Warriors.Tests
             army26.AddUnits<Warrior>(4);
             army26.AddUnits<Defender>(4);
             army26.AddUnits<Vampire>(13);
+
+            army27.AddUnits<Lancer>(5);
+            army27.AddUnits<Vampire>(3);
+            army27.AddUnits<Warrior>(4);
+            army27.AddUnits<Defender>(2);
+            army28.AddUnits<Warrior>(4);
+            army28.AddUnits<Defender>(4);
+            army28.AddUnits<Vampire>(6);
+            army28.AddUnits<Lancer>(5);
+
+            army29.AddUnits<Lancer>(7);
+            army29.AddUnits<Vampire>(3);
+            army29.AddUnits<Warrior>(4);
+            army29.AddUnits<Defender>(2);
+            army30.AddUnits<Warrior>(4);
+            army30.AddUnits<Defender>(4);
+            army30.AddUnits<Vampire>(6);
+            army30.AddUnits<Lancer>(5);
         }
         public IEnumerator<object[]> GetEnumerator()
         {
@@ -131,6 +153,8 @@ namespace Warriors.Tests
             yield return new object[] { army21, army22, false };
             yield return new object[] { army23, army24, true };
             yield return new object[] { army25, army26, true };
+            yield return new object[] { army27, army28, false };
+            yield return new object[] { army29, army30, true };
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

@@ -73,7 +73,7 @@ namespace Warriors.Tests
         public void DealDamage_Warriors_HealthPointChangeCorrect(Warrior target, Warrior attacker, int expected)
         {
             int attackerHpRemainsMaximum = 50;
-            attacker.DealDamage(target);
+            attacker.DealDamage(target, attacker.Attack);
             var actual = target.Health;
 
             Assert.Equal(expected, actual);
