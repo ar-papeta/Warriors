@@ -16,7 +16,8 @@ namespace Warriors
         public Defender()
         {
             Defense = 2;
-            Health = 60;
+            MaxHealth = 60;
+            Health = MaxHealth;
             Attack = 3;
         }
 
@@ -29,11 +30,6 @@ namespace Warriors
             Health -= realDamage;
 
             return realDamage;
-        }
-
-        public override int DealDamage(Warrior target, int damage)
-        {
-           return target.TakeDamage(damage);
         }
     }
 }

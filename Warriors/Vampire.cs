@@ -8,15 +8,14 @@ namespace Warriors
 {
     public class Vampire : Warrior
     {
-        private readonly int _startHp;
-
+      
         public int Vampirism { get; set; }
 
         public Vampire()
         {
             Attack = 4;
-            Health = 40;
-            _startHp = Health;
+            MaxHealth = 40;
+            Health = MaxHealth;
             Vampirism = 50;
         }
 
@@ -25,9 +24,9 @@ namespace Warriors
             var actualDamage = target.TakeDamage(damage);
             int vampirismHeal = actualDamage * Vampirism / 100;
             Health += vampirismHeal;
-            if (Health > _startHp)
+            if (Health > MaxHealth)
             {
-                Health = _startHp;
+                Health = MaxHealth;
             }
 
             return actualDamage;
