@@ -43,17 +43,12 @@ namespace Warriors
         public void Attack(Army enemy)
         {
             var unit = TakeFirstAlive();
-            var enemyUnit = enemy.TakeFirstAlive();
 
-            var damageToFirstEnemy = unit.DealDamage(enemyUnit, unit.Attack);
+            unit.DealDamage(enemy);
 
-            if (unit is Lancer)
+            if(TakeSecondAlive() is Healer healer)
             {
-                var secondEnemy = enemyUnit.IsAlive ? enemy.TakeSecondAlive() : enemy.TakeFirstAlive();
-                if (secondEnemy is not null)
-                {
-                    unit.DealDamage(secondEnemy, damageToFirstEnemy / 2);
-                }
+                healer.Heal(unit);
             }
         }
     }

@@ -7,14 +7,17 @@ using Xunit;
 
 namespace Warriors.Tests
 {
+    /// <seealso cref="ArmyTests"> 
+    /// Here is tests army vs army with lancer units.
+    /// </seealso>
     public class LancerTests 
     {
         [Fact]
         public void Lancer_Attack_IsCorrect()
         {
             var expected = 6;
-            Warrior defender = new Lancer();
-            var actual = defender.Attack;
+            Warrior lancer = new Lancer();
+            var actual = lancer.Attack;
 
             Assert.Equal(expected, actual);
         }

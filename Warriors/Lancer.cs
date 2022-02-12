@@ -30,5 +30,19 @@ namespace Warriors
 
             return realDamage;
         }
+
+        public override void DealDamage(Army enemy)
+        {
+            var enemyUnit = enemy.TakeFirstAlive();
+
+            var damageToFirstEnemy = DealDamage(enemyUnit, Attack);
+
+            var secondEnemy = enemyUnit.IsAlive ? enemy.TakeSecondAlive() : enemy.TakeFirstAlive();
+            if (secondEnemy is not null)
+            {
+                DealDamage(secondEnemy, damageToFirstEnemy / 2);
+            }
+            
+        }
     }
 }

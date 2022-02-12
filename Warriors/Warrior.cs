@@ -8,9 +8,14 @@ namespace Warriors
 {
     public class Warrior
     {
-        
+
         /// <value>
         /// Warrior's base health points 
+        /// </value>
+        public int MaxHealth { get; protected set; } = 50;
+
+        /// <value>
+        /// Warrior's current health points 
         /// </value>
         public int Health { get; protected set; } = 50;
 
@@ -35,6 +40,18 @@ namespace Warriors
         public virtual int DealDamage(Warrior target, int damage)
         {
             return target.TakeDamage(damage);
+        }
+
+        public virtual void DealDamage(Army enemy)
+        {
+            var enemyUnit = enemy.TakeFirstAlive();
+
+            _ = DealDamage(enemyUnit, Attack);
+        }
+
+        public void TakeHeal(int healPower)
+        {
+            Health = Math.Clamp(Health + healPower, 0, MaxHealth);
         }
     }
 }

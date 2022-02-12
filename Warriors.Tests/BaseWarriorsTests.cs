@@ -18,6 +18,7 @@ namespace Warriors.Tests
         [InlineData("Army")]
         [InlineData("Vampire")]
         [InlineData("Lancer")]
+        [InlineData("Healer")]
         public void Class_IsClassExist(string className)
         {
             var type = Type.GetType($"{AssemblyName}.{className}, {AssemblyName}");
@@ -30,6 +31,7 @@ namespace Warriors.Tests
         [InlineData("Warrior", "Knight")]
         [InlineData("Warrior", "Vampire")]
         [InlineData("Warrior", "Lancer")]
+        [InlineData("Warrior", "Healer")]
         public void Class_IsClassInheritsFromClass(string parentClassName, string childClassName)
         {
             var parentType = Type.GetType($"{AssemblyName}.{parentClassName}, {AssemblyName}");
