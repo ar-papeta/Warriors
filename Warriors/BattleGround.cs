@@ -11,9 +11,17 @@ namespace Warriors
         public static bool Fight(Warrior first, Warrior second)
         {
             if (first is null)
+            {
                 throw new ArgumentNullException(nameof(first), "Warrior can not be null");
+            }   
             if (second is null)
+            {
                 throw new ArgumentNullException(nameof(second), "Warrior can not be null");
+            } 
+            if(first is Healer &&  second is Healer)
+            {
+                throw new ArgumentNullException(nameof(second), "Can not fight with two Healers");
+            }
 
             int round = 1;
             while(first.IsAlive && second.IsAlive)
@@ -21,14 +29,18 @@ namespace Warriors
                 if (round % 2 != 0)
                 {
                     first.DealDamage(second, first.Attack);
+                    Console.Write(round + "r: " +first.Health + "  ");
+                    Console.WriteLine(second.Health + "  ");
                 }
                 else
                 {
                     second.DealDamage(first, second.Attack);
+                    Console.Write(round + "r: " + first.Health + "  ");
+                    Console.WriteLine(second.Health + "  ");
                 }
                 round++;
             }
-
+            Console.WriteLine("---end---");
             return first.IsAlive;
         }
 
@@ -51,6 +63,22 @@ namespace Warriors
                         secondArmy.Attack(firstArmy);
                     }
                     round++;
+                }
+            }
+            return firstArmy.IsAlive;
+        }
+
+        public static bool StraightFight(Army firstArmy, Army secondArmy)
+        {
+            while (firstArmy.IsAlive && secondArmy.IsAlive)
+            {
+                var armyPairs = firstArmy.GetAllAlive().Zip(secondArmy.GetAllAlive());
+                Console.WriteLine("*******************************************");
+                foreach (var (First, Second) in armyPairs)
+                {
+                    Console.WriteLine(First.GetType());
+                    Console.WriteLine(Second.GetType());
+                    Fight(First, Second);
                 }
             }
             return firstArmy.IsAlive;
