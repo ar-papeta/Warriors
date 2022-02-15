@@ -11,7 +11,7 @@ namespace Warriors
             army.AddUnits<Lancer>(1);
             army2.AddUnits<Defender>(1);
             army2.AddUnits<Knight>(1);
-            bool b = BattleGround.Fight(army, army2);
+            BattleGround.Fight(army, army2);
             Console.WriteLine(army2);
         }
     }

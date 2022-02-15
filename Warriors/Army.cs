@@ -10,6 +10,8 @@ namespace Warriors
     {
         private readonly List<Warrior> _army;
 
+        public Warrior this[int i] => _army.Where(w => w.IsAlive).Skip(i).FirstOrDefault();
+
         public bool IsAlive => AliveUnitsCount > 0;
 
         public int ArmyHp => _army.Sum(x => x.Health);
@@ -40,15 +42,29 @@ namespace Warriors
                 _army.Add(new T());
             }
         }
+
         public void Attack(Army enemy)
         {
             var unit = TakeFirstAlive();
 
             unit.DealDamage(enemy);
 
-            if(TakeSecondAlive() is Healer healer)
+            HealArmy();
+        }
+
+        private void HealArmy()
+        {
+            for (int i = 1; i < AliveUnitsCount; i++)
             {
-                healer.Heal(unit);
+                if(this[i] is Healer healer)
+                {
+                    var unitForHeal = this[i - 1];
+
+                    if(unitForHeal is not null)
+                    {
+                        healer.Heal(unitForHeal);
+                    }
+                }
             }
         }
     }

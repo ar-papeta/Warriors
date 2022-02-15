@@ -50,7 +50,7 @@ namespace Warriors.Tests
             new object[] { new Knight(), new Knight() },
         };
 
-        [Theory]
+        [Theory(DisplayName = "lol")]
         [MemberData(nameof(NullWarriorData))]
         public void Fight_NullWarrior_ThrowArgumentNullException(Warrior first, Warrior second)
         {
