@@ -18,6 +18,8 @@ namespace Warriors
 
         private int AliveUnitsCount => _army.Count(w => w.IsAlive);
 
+        public IEnumerable<Warrior> GetAllAlive() => _army.Where(w => w.IsAlive);
+
         public Army()
         {
             _army = new();

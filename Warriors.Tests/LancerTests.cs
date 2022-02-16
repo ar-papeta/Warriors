@@ -23,7 +23,7 @@ namespace Warriors.Tests
         }
 
         [Theory]
-        [MemberData(nameof(LancerTestDataData))]
+        [MemberData(nameof(LancerTestData))]
         public void Fight_LancerVsUnitsInArmy_ReturnCorrectResidualHp(Army army1, Army army2, bool fightResult, int residualHp)
         {
             var actualFightResult = BattleGround.Fight(army1, army2);
@@ -34,7 +34,7 @@ namespace Warriors.Tests
             Assert.Equal(expectedHp, actualHp);
         }
 
-        public static IEnumerable<object[]> LancerTestDataData()
+        public static IEnumerable<object[]> LancerTestData()
         {
             
             Army army1 = new();
