@@ -20,7 +20,7 @@ namespace Warriors
             } 
             if(first is Healer &&  second is Healer)
             {
-                throw new ArgumentNullException(nameof(second), "Can not fight with two Healers");
+                throw new ArgumentNullException(nameof(second), "Can not create fight with two Healers");
             }
 
             int round = 1;

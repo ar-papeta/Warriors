@@ -22,6 +22,8 @@ namespace Warriors
             army6.AddUnits<Lancer>(4);
             BattleGround.StraightFight(army5, army6);
             
+
+
         }
     }
 }
