@@ -38,7 +38,7 @@ namespace Warriors.Tests
             {
                 new object[] { vampire, defender, 1 },
                 new object[] { vampire, warrior, 2 },
-                new object[] { vampire, custom, 0 },
+                new object[] { vampire, custom, 2 },
                 new object[] { vampireFullHp, warrior, 0 },
             };
         }

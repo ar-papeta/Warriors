@@ -60,7 +60,7 @@ namespace Warriors.Tests
             Army army7 = new();
             Army army8 = new();
             army7.AddUnits<Lancer>(4);
-            army7.AddUnits<Vampire>(3);
+            army7.AddUnits<Warrior>(3);
             army7.AddUnits<Healer>(1);
             army7.AddUnits<Warrior>(4);
             army7.AddUnits<Healer>(1);

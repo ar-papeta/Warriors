@@ -22,6 +22,16 @@ namespace Warriors
         public override int DealDamage(Warrior target, int damage)
         {
             var actualDamage = target.TakeDamage(damage);
+
+            if (!target.IsAlive && target is Defender defender)
+            {
+                actualDamage = Attack - defender.Defense;
+            }
+
+            else if (target is not Defender)
+            {
+                actualDamage = Attack;
+            }
             int vampirismHeal = actualDamage * Vampirism / 100;
             Health += vampirismHeal;
             if (Health > MaxHealth)
