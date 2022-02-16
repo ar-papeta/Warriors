@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Warriors.WeaponBuilder;
+using Warriors.Weapons;
 
 namespace Warriors
 {
     public class Warrior
     {
-        private readonly List<Weapon> _equipment;
+        private readonly List<Weapons.Weapon> _equipment;
         /// <value>
         /// Warrior's base health points 
         /// </value>
@@ -62,7 +62,7 @@ namespace Warriors
             Health = Math.Clamp(Health + healPower, 0, MaxHealth);
         }
         
-        public virtual void EquipWeapon(Weapon weapon)
+        public virtual void EquipWeapon(Weapons.Weapon weapon)
         {
             _equipment.Add(weapon);
         }

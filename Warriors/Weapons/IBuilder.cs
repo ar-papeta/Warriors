@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Warriors.WeaponBuilder
+namespace Warriors.Weapons
 {
     /// <summary>
     /// Helps making builder for objects
@@ -21,6 +21,6 @@ namespace Warriors.WeaponBuilder
         /// Returns ready object
         /// </summary>
         /// <returns>Builded <typeparamref name="T"/> object</returns>
-        public T GetResult();
+        public T Build();
     }
 }
