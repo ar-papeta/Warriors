@@ -21,6 +21,21 @@ namespace Warriors.Tests
             Assert.Equal(w.MaxHealth, w.Health);
         }
 
+        [Fact]
+        public void Fight_WithHealer_OutFromInfinitLoop()
+        {
+            Army army1 = new();
+            army1.AddUnits<Defender>(1);
+            army1.AddUnits<Healer>(1);
+
+            Army army2 = new();
+            army2.AddUnits<Vampire>(1);
+            army2.AddUnits<Healer>(1);
+
+            var actual = BattleGround.Fight(army1, army2);
+            Assert.True(actual);
+        }
+
         [Theory]
         [MemberData(nameof(HealerTestDataData))]
         public void Heal_UnitInArmy_AddCorrectHpCount(Army army1, Army army2, int expected)

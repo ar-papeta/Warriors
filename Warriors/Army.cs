@@ -29,6 +29,7 @@ namespace Warriors
         /// <returns>First alive warrior or null if not exist</returns>
         public Warrior TakeFirstAlive()
         {
+            
             return _army.FirstOrDefault(w => w.IsAlive);
         }
 
@@ -62,12 +63,24 @@ namespace Warriors
                 {
                     var unitForHeal = this[i - 1];
 
-                    if(unitForHeal is not null)
+                    if(unitForHeal is not null && unitForHeal.Health != unitForHeal.MaxHealth)
                     {
                         healer.Heal(unitForHeal);
                     }
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder str = new();
+            int i = 1;
+            str.Append($"Army has units: \n");
+            foreach (var unit in GetAllAlive())
+            {
+                str.Append($"{i++}: {unit.GetType()} \n");
+            }
+            return str.ToString();
         }
     }
 }

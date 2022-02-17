@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Warriors.WeaponBuilder;
+using Warriors.Weapons;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Warriors
 {
     public class Warrior
     {
         private readonly List<Weapon> _equipment;
+        protected readonly ObservableCollection<Weapon> equipment;
         /// <value>
         /// Warrior's base health points 
         /// </value>
@@ -36,6 +39,9 @@ namespace Warriors
             MaxHealth = 50;
             Health = MaxHealth;
             _equipment = new();
+            equipment = new();
+            equipment.CollectionChanged += EquipmentChanged;
+
         }
         public virtual int TakeDamage(int damage)
         {
@@ -64,7 +70,39 @@ namespace Warriors
         
         public virtual void EquipWeapon(Weapon weapon)
         {
-            _equipment.Add(weapon);
+            equipment.Add(weapon);
+        }
+
+        protected virtual void EquipmentChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    if (e.NewItems[0] is Weapon nw)
+                    {
+                        Attack = Math.Max(Attack + nw.Attack, 0);
+                        Health = Math.Max(Health + nw.Health, 0);
+                        MaxHealth = Math.Max(MaxHealth + nw.Health, 0);
+                        Console.WriteLine($"Add {nw}");
+                    }
+                    break;
+
+                case NotifyCollectionChangedAction.Remove: 
+                    if (e.OldItems?[0] is Weapon ow)
+                    {
+                        Attack = Math.Max(Attack - ow.Attack, 0);
+                        Health = Math.Max(Health - ow.Health, 0);
+                        MaxHealth = Math.Max(MaxHealth - ow.Health, 0);
+                        Console.WriteLine($"Удален {ow}");
+                    }
+                    break;
+            }
+        }
+        public override string ToString()
+        {
+            return $"Warrior {GetType()}\n" +
+                   $"  Health: {Health}\n"  +
+                   $"  Attack: {Attack}\n";
         }
     }
 }

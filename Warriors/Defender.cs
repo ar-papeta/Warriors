@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Warriors.Weapons;
 
 namespace Warriors
 {
@@ -30,6 +32,33 @@ namespace Warriors
             Health -= realDamage;
 
             return realDamage;
+        }
+
+        protected override void EquipmentChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            base.EquipmentChanged(sender, e);
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    if (e.NewItems[0] is Weapon nw)
+                    {
+                        Defense = Math.Max(nw.Defense + Defense, 0);
+                        Console.WriteLine($"Add {nw}");
+                    }
+                    break;
+
+                case NotifyCollectionChangedAction.Remove:
+                    if (e.OldItems?[0] is Weapon ow)
+                    {
+                        Defense = Math.Max(Defense - ow.Defense, 0);
+                    }
+                    break;
+            }
+        }
+        public override string ToString()
+        {
+            return base.ToString() +
+                   $"  Defense: {Defense}\n";
         }
     }
 }
