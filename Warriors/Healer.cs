@@ -38,23 +38,21 @@ namespace Warriors
 
         protected override void EquipmentChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            base.EquipmentChanged(sender, e);
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
                     if (e.NewItems[0] is Weapon nw)
                     {
-                        Health += nw.Health;
-                        MaxHealth += nw.Health;
-                        HealPower += nw.HealPower;
+                        HealPower = Math.Max(nw.HealPower + HealPower, 0);
+                        Attack = 0;
                     }
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
                     if (e.OldItems?[0] is Weapon ow)
                     {
-                        Health -= ow.Health;
-                        MaxHealth -= ow.Health;
-                        HealPower -= ow.HealPower;
+                        HealPower = Math.Max(HealPower - ow.HealPower, 0);
                     }
                     break;
             }

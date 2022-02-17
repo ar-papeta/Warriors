@@ -46,15 +46,13 @@ namespace Warriors
 
         protected override void EquipmentChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            base.EquipmentChanged(sender, e);
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
                     if (e.NewItems[0] is Weapon nw)
                     {
-                        Health += nw.Health;
-                        MaxHealth += nw.Health;
-                        Attack += nw.Attack;
-                        Vampirism += nw.Vampirism;
+                        Vampirism = Math.Max(Vampirism + nw.Vampirism, 0);
                         Console.WriteLine($"Добавлен {nw}");
                     }
                     break;
@@ -62,10 +60,7 @@ namespace Warriors
                 case NotifyCollectionChangedAction.Remove:
                     if (e.OldItems?[0] is Weapon ow)
                     {
-                        Health -= ow.Health;
-                        MaxHealth -= ow.Health;
-                        Attack -= ow.Attack;
-                        Vampirism -= ow.Vampirism;
+                        Vampirism = Math.Max(Vampirism - ow.Vampirism, 0);
                         Console.WriteLine($"Удален {ow}");
                     }
                     break;

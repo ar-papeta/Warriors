@@ -80,9 +80,9 @@ namespace Warriors
                 case NotifyCollectionChangedAction.Add:
                     if (e.NewItems[0] is Weapon nw)
                     {
-                        Health += nw.Health;
-                        MaxHealth += nw.Health;
-                        Attack += nw.Attack;
+                        Attack = Math.Max(Attack + nw.Attack, 0);
+                        Health = Math.Max(Health + nw.Health, 0);
+                        MaxHealth = Math.Max(MaxHealth + nw.Health, 0);
                         Console.WriteLine($"Add {nw}");
                     }
                     break;
@@ -90,9 +90,9 @@ namespace Warriors
                 case NotifyCollectionChangedAction.Remove: 
                     if (e.OldItems?[0] is Weapon ow)
                     {
-                        Health -= ow.Health;
-                        MaxHealth -= ow.Health;
-                        Attack -= ow.Attack;
+                        Attack = Math.Max(Attack - ow.Attack, 0);
+                        Health = Math.Max(Health - ow.Health, 0);
+                        MaxHealth = Math.Max(MaxHealth - ow.Health, 0);
                         Console.WriteLine($"Удален {ow}");
                     }
                     break;
