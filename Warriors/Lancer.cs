@@ -16,6 +16,7 @@ namespace Warriors
         public override int DealDamage(Warrior target, int damage)
         {
             var realDamage = target.TakeDamage(damage);
+
             if (!target.IsAlive)
             {
                 if(target is Defender defender)
@@ -38,6 +39,7 @@ namespace Warriors
             var damageToFirstEnemy = DealDamage(enemyUnit, Attack);
 
             var secondEnemy = enemyUnit.IsAlive ? enemy.TakeSecondAlive() : enemy.TakeFirstAlive();
+
             if (secondEnemy is not null)
             {
                 DealDamage(secondEnemy, damageToFirstEnemy / 2);

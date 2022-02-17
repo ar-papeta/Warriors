@@ -19,6 +19,7 @@ namespace Warriors.Tests
         [InlineData("Vampire")]
         [InlineData("Lancer")]
         [InlineData("Healer")]
+        [InlineData("BattleGround")]
         public void Class_IsClassExist(string className)
         {
             var type = Type.GetType($"{AssemblyName}.{className}, {AssemblyName}");

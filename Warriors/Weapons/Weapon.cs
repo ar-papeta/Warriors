@@ -11,27 +11,27 @@ namespace Warriors.Weapons
         /// <value>
         /// Add to the current health and the maximum health of the soldier this modificator
         /// </value>
-        private int _health;
+        public int Health { get; private set; }
 
         /// <value>
         /// Add to the soldier's attack this modificator
         /// </value>
-        private int _attack;
+        public int Attack { get; private set; }
 
         /// <value>
         /// Add to the soldier's defense this modificator
         /// </value>
-        private int _defense;
+        public int Defense { get; private set; }
 
         /// <value>
         /// Increase the soldier’s vampirism to this number
         /// </value>
-        private int _vampirism;
+        public int Vampirism { get; private set; }
 
         /// <value>
         /// Increase the amount of health which the healer restore for the allied unit 
         /// </value>
-        private int _healPower;
+        public int HealPower { get; private set; }
 
         private Weapon() { }
 
@@ -43,11 +43,11 @@ namespace Warriors.Weapons
         public override string ToString()
         {
             return $"Weapon has attributes: \n " + 
-                   $"  health: {_health} \n " +
-                   $"  defense: {_defense} \n " +
-                   $"  attack: {_attack} \n " +
-                   $"  heal power: {_healPower} \n " +
-                   $"  vampirism: {_vampirism} \n ";
+                   $"  health: {Health} \n " +
+                   $"  defense: {Defense} \n " +
+                   $"  attack: {Attack} \n " +
+                   $"  heal power: {HealPower} \n " +
+                   $"  vampirism: {Vampirism} \n ";
            
         }
 
@@ -61,13 +61,13 @@ namespace Warriors.Weapons
             }
             public IWeaponBuilder Attack(int attack)
             {
-                _result._attack = attack;
+                _result.Attack = attack;
                 return this;
             }
 
             public IWeaponBuilder Defense(int defense)
             {
-                _result._defense = defense;
+                _result.Defense = defense;
                 return this;
             }
 
@@ -78,13 +78,13 @@ namespace Warriors.Weapons
 
             public IWeaponBuilder HealPower(int healPower)
             {
-                _result._healPower = healPower;
+                _result.HealPower = healPower;
                 return this;
             }
 
             public IWeaponBuilder Health(int health)
             {
-                _result._health = health;
+                _result.Health = health;
                 return this;
             }
 
@@ -95,7 +95,7 @@ namespace Warriors.Weapons
 
             public IWeaponBuilder Vampirism(int vampirism)
             {
-                _result._vampirism = vampirism;
+                _result.Vampirism = vampirism;
                 return this;
             }
         }

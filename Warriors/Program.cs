@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Warriors.Weapons;
 
 namespace Warriors
@@ -7,14 +8,17 @@ namespace Warriors
     {
         static void Main(string[] args)
         {
-            Weapon me4 = Weapon.Builder()
-                                .Vampirism(10)
-                                .Health(4)
-                                .Attack(-12)
-                                .Build();
-            
-            Console.WriteLine(me4.ToString());
+            Warrior defender = new Defender();
+            Weapon weapon3 = SecretShop.Shield();
+            defender.EquipWeapon(weapon3);
+            Weapon weapon4 = SecretShop.GreatAxe();
+            Warrior lancer = new Lancer();
+            lancer.EquipWeapon(weapon4);
 
+            Console.WriteLine(defender);
+            Console.WriteLine(lancer);
+
+            BattleGround.Fight(defender, lancer);
         }
     }
 }
