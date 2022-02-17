@@ -8,10 +8,14 @@ namespace Warriors
 {
     public class Healer : Warrior
     {
-        public int HealPower { get; protected set; } = 2;
-
+        public int HealPower { get; protected set; }
+        public int MaxManaPoints { get; private set; }
+        public int CurrentManaPoints { get; private set; }
         public Healer()
         {
+            MaxManaPoints = 100;
+            CurrentManaPoints = MaxManaPoints;
+            HealPower = 2;
             MaxHealth = 60;
             Health = MaxHealth;
             Attack = 0;
@@ -19,7 +23,15 @@ namespace Warriors
 
         public void Heal(Warrior target)
         {
-            target.TakeHeal(HealPower);
+            if(CurrentManaPoints-- > 0)
+            {
+                target.TakeHeal(HealPower);
+            }
+        }
+
+        public void SetManaToMax()
+        {
+            CurrentManaPoints = MaxManaPoints;
         }
     }
 }

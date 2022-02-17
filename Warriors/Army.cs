@@ -62,7 +62,7 @@ namespace Warriors
                 {
                     var unitForHeal = this[i - 1];
 
-                    if(unitForHeal is not null)
+                    if(unitForHeal is not null && unitForHeal.Health != unitForHeal.MaxHealth)
                     {
                         healer.Heal(unitForHeal);
                     }
