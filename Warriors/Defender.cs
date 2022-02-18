@@ -43,7 +43,6 @@ namespace Warriors
                     if (e.NewItems[0] is Weapon nw)
                     {
                         Defense = Math.Max(nw.Defense + Defense, 0);
-                        Console.WriteLine($"Add {nw}");
                     }
                     break;
 

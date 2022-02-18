@@ -37,6 +37,7 @@ namespace Warriors
                     second.DealDamage(first, second.Attack);
                     Console.Write(round + "r: " + first.Health + "  ");
                     Console.WriteLine(second.Health + "  ");
+
                 }
                 round++;
             }
@@ -59,6 +60,7 @@ namespace Warriors
                     if (round % 2 != 0)
                     {
                         firstArmy.Attack(secondArmy);
+                        
                     }
                     else
                     {
@@ -85,13 +87,14 @@ namespace Warriors
             while (firstArmy.IsAlive && secondArmy.IsAlive)
             {
                 var armyPairs = firstArmy.TakeAllAlive().Zip(secondArmy.TakeAllAlive());
-                Console.WriteLine("*******************************************");
                 foreach (var (First, Second) in armyPairs)
                 {
                     Console.WriteLine(First.GetType());
                     Console.WriteLine(Second.GetType());
                     Fight(First, Second);
                 }
+                firstArmy.MoveUnits();
+                secondArmy.MoveUnits();
             }
             return firstArmy.IsAlive;
         }
