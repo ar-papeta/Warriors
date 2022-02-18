@@ -61,6 +61,11 @@ namespace Warriors
             var enemyUnit = enemy.TakeFirstAlive();
 
             _ = DealDamage(enemyUnit, Attack);
+
+            if (enemy.HasNewDeadUnits())
+            {
+                enemy.MoveUnits();
+            }
         }
 
         public void TakeHeal(int healPower)

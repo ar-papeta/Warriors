@@ -46,6 +46,8 @@ namespace Warriors
 
         public static bool Fight(Army firstArmy, Army secondArmy)
         {
+            PrepareArmy(firstArmy);
+            PrepareArmy(secondArmy);
             while (firstArmy.IsAlive && secondArmy.IsAlive)
             {
                 var firstUnit = firstArmy.TakeFirstAlive();
@@ -62,17 +64,27 @@ namespace Warriors
                     {
                         secondArmy.Attack(firstArmy);
                     }
+                    
                     round++;
                 }
             }
             return firstArmy.IsAlive;
         }
 
+        private static void PrepareArmy(Army army)
+        {
+            foreach (Healer healer in army.TakeAllAlive().OfType<Healer>())
+            {
+                healer.SetManaToMax();
+            }
+            army.MoveUnits();
+        }
+
         public static bool StraightFight(Army firstArmy, Army secondArmy)
         {
             while (firstArmy.IsAlive && secondArmy.IsAlive)
             {
-                var armyPairs = firstArmy.GetAllAlive().Zip(secondArmy.GetAllAlive());
+                var armyPairs = firstArmy.TakeAllAlive().Zip(secondArmy.TakeAllAlive());
                 Console.WriteLine("*******************************************");
                 foreach (var (First, Second) in armyPairs)
                 {

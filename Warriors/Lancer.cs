@@ -44,7 +44,12 @@ namespace Warriors
             {
                 DealDamage(secondEnemy, damageToFirstEnemy / 2);
             }
-            
+
+            if (enemy.HasNewDeadUnits())
+            {
+                enemy.MoveUnits();
+            }
+
         }
     }
 }
