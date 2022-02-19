@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Warriors.Validation;
 
 namespace Warriors
 {
@@ -10,18 +11,7 @@ namespace Warriors
     {
         public static bool Fight(Warrior first, Warrior second)
         {
-            if (first is null)
-            {
-                throw new ArgumentNullException(nameof(first), "Warrior can not be null");
-            }   
-            if (second is null)
-            {
-                throw new ArgumentNullException(nameof(second), "Warrior can not be null");
-            } 
-            if(first is Healer &&  second is Healer)
-            {
-                throw new ArgumentNullException(nameof(second), "Can not create fight with two Healers");
-            }
+            Validator.ValidateFight(first, second);
 
             int round = 1;
             while(first.IsAlive && second.IsAlive)
@@ -47,8 +37,11 @@ namespace Warriors
 
         public static bool Fight(Army firstArmy, Army secondArmy)
         {
+            Validator.ValidateFight(firstArmy, secondArmy);
+
             PrepareArmy(firstArmy);
             PrepareArmy(secondArmy);
+
             while (firstArmy.IsAlive && secondArmy.IsAlive)
             {
                 var firstUnit = firstArmy.TakeFirstAlive();
@@ -71,24 +64,18 @@ namespace Warriors
                         Console.Write(round + "r: " + firstUnit.Health + "  ");
                         Console.WriteLine(secondUnit.Health + "  ");
                     }
-                    
                     round++;
                 }
             }
             return firstArmy.IsAlive;
         }
 
-        private static void PrepareArmy(Army army)
-        {
-            foreach (Healer healer in army.TakeAllAlive().OfType<Healer>())
-            {
-                healer.SetManaToMax();
-            }
-            army.MoveUnits();
-        }
-
         public static bool StraightFight(Army firstArmy, Army secondArmy)
         {
+            Validator.ValidateFight(firstArmy, secondArmy);
+
+            PrepareArmy(firstArmy);
+            PrepareArmy(secondArmy);
             while (firstArmy.IsAlive && secondArmy.IsAlive)
             {
                 
@@ -108,7 +95,17 @@ namespace Warriors
                     }
                 }
             }
+
             return firstArmy.IsAlive;
+        }
+
+        private static void PrepareArmy(Army army)
+        {
+            foreach (Healer healer in army.TakeAllAlive().OfType<Healer>())
+            {
+                healer.SetManaToMax();
+            }
+            army.MoveUnits();
         }
     }
 }

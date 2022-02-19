@@ -51,24 +51,6 @@ namespace Warriors.Tests
         };
 
         [Theory]
-        [MemberData(nameof(NullWarriorData))]
-        public void Fight_NullWarrior_ThrowArgumentNullException(Warrior first, Warrior second)
-        {
-                var expectedException = typeof(ArgumentNullException);
-                var actException = Assert.Throws<ArgumentNullException>(() => BattleGround.Fight(first, second));
-
-                Assert.Equal(expectedException, actException.GetType());
-        }
-
-        public static IEnumerable<object[]> NullWarriorData =>
-        new List<object[]>
-        {
-            new object[] { null, new Warrior() },
-            new object[] { new Knight(), null },
-            new object[] { null, null },
-        };
-
-        [Theory]
         [MemberData(nameof(HealthPointChangeData))]
         public void DealDamage_Warriors_HealthPointChangeCorrect(Warrior target, Warrior attacker, int expected)
         {
