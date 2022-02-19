@@ -36,6 +36,7 @@ namespace Warriors.Tests
         [InlineData("Warrior", "Lancer")]
         [InlineData("Warrior", "Healer")]
         [InlineData("Warrior", "Warlord")]
+        [InlineData("Defender", "Warlord")]
         public void Class_IsClassInheritsFromClass(string parentClassName, string childClassName)
         {
             var parentType = Type.GetType($"{AssemblyName}.{parentClassName}, {AssemblyName}");
@@ -49,6 +50,24 @@ namespace Warriors.Tests
                 Assert.True(false, $"Class '{childType}' doesn't inherit from '{parentType}'");
             }
         }
+
+        [Theory]
+        [MemberData(nameof(NullWarriorData))]
+        public void Fight_NullWarrior_ThrowArgumentNullException(Warrior first, Warrior second)
+        {
+            var expectedException = typeof(ArgumentNullException);
+            var actException = Assert.Throws<ArgumentNullException>(() => BattleGround.Fight(first, second));
+
+            Assert.Equal(expectedException, actException.GetType());
+        }
+
+        public static IEnumerable<object[]> NullWarriorData =>
+        new List<object[]>
+        {
+            new object[] { null, new Warrior() },
+            new object[] { new Knight(), null },
+            new object[] { null, null },
+        };
 
 
     }
