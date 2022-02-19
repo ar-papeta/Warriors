@@ -11,7 +11,6 @@ namespace Warriors
 {
     public class Warrior
     {
-        private readonly List<Weapon> _equipment;
         protected readonly ObservableCollection<Weapon> equipment;
         /// <value>
         /// Warrior's base health points 
@@ -38,7 +37,6 @@ namespace Warriors
             Attack = 5;
             MaxHealth = 50;
             Health = MaxHealth;
-            _equipment = new();
             equipment = new();
             equipment.CollectionChanged += EquipmentChanged;
 
@@ -61,6 +59,11 @@ namespace Warriors
             var enemyUnit = enemy.TakeFirstAlive();
 
             _ = DealDamage(enemyUnit, Attack);
+
+            if (enemy.HasNewDeadUnits())
+            {
+                enemy.MoveUnits();
+            }
         }
 
         public void TakeHeal(int healPower)

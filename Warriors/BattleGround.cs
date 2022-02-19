@@ -37,6 +37,7 @@ namespace Warriors
                     second.DealDamage(first, second.Attack);
                     Console.Write(round + "r: " + first.Health + "  ");
                     Console.WriteLine(second.Health + "  ");
+
                 }
                 round++;
             }
@@ -46,39 +47,65 @@ namespace Warriors
 
         public static bool Fight(Army firstArmy, Army secondArmy)
         {
+            PrepareArmy(firstArmy);
+            PrepareArmy(secondArmy);
             while (firstArmy.IsAlive && secondArmy.IsAlive)
             {
                 var firstUnit = firstArmy.TakeFirstAlive();
                 var secondUnit = secondArmy.TakeFirstAlive();
 
                 int round = 1;
+                Console.WriteLine(firstUnit.GetType());
+                Console.WriteLine(secondUnit.GetType());
                 while (firstUnit.IsAlive && secondUnit.IsAlive)
                 {
                     if (round % 2 != 0)
                     {
                         firstArmy.Attack(secondArmy);
+                        Console.Write(round + "r: " + firstUnit.Health + "  ");
+                        Console.WriteLine(secondUnit.Health + "  ");
                     }
                     else
                     {
                         secondArmy.Attack(firstArmy);
+                        Console.Write(round + "r: " + firstUnit.Health + "  ");
+                        Console.WriteLine(secondUnit.Health + "  ");
                     }
+                    
                     round++;
                 }
             }
             return firstArmy.IsAlive;
         }
 
+        private static void PrepareArmy(Army army)
+        {
+            foreach (Healer healer in army.TakeAllAlive().OfType<Healer>())
+            {
+                healer.SetManaToMax();
+            }
+            army.MoveUnits();
+        }
+
         public static bool StraightFight(Army firstArmy, Army secondArmy)
         {
             while (firstArmy.IsAlive && secondArmy.IsAlive)
             {
-                var armyPairs = firstArmy.GetAllAlive().Zip(secondArmy.GetAllAlive());
-                Console.WriteLine("*******************************************");
+                
+                var armyPairs = firstArmy.TakeAllAlive().Zip(secondArmy.TakeAllAlive());
                 foreach (var (First, Second) in armyPairs)
                 {
                     Console.WriteLine(First.GetType());
                     Console.WriteLine(Second.GetType());
-                    Fight(First, Second);
+                    bool res = Fight(First, Second);
+                    if (res)
+                    {
+                        secondArmy.MoveUnits();
+                    }
+                    else
+                    {
+                        firstArmy.MoveUnits();
+                    }
                 }
             }
             return firstArmy.IsAlive;

@@ -10,7 +10,7 @@ namespace Warriors.Tests
     public class BaseWarriorsTests
     {
         private readonly string AssemblyName = "Warriors";
-        
+
         [Theory]
         [InlineData("Defender")]
         [InlineData("Knight")]
@@ -20,6 +20,8 @@ namespace Warriors.Tests
         [InlineData("Lancer")]
         [InlineData("Healer")]
         [InlineData("BattleGround")]
+        [InlineData("Warlord")]
+        [InlineData("Weapons.Weapon")]
         public void Class_IsClassExist(string className)
         {
             var type = Type.GetType($"{AssemblyName}.{className}, {AssemblyName}");
@@ -33,6 +35,7 @@ namespace Warriors.Tests
         [InlineData("Warrior", "Vampire")]
         [InlineData("Warrior", "Lancer")]
         [InlineData("Warrior", "Healer")]
+        [InlineData("Warrior", "Warlord")]
         public void Class_IsClassInheritsFromClass(string parentClassName, string childClassName)
         {
             var parentType = Type.GetType($"{AssemblyName}.{parentClassName}, {AssemblyName}");
