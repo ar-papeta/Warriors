@@ -20,52 +20,47 @@ namespace Warriors
         {
             Warrior[] sortedUnits = new Warrior[army.Capacity];
 
+
             int unitsOffset = army.DeadUnitsCount;
             int healersOffset = 0;
+            int enotherOffset = 0;
+
             Array.Copy(army.TakeAllDead().ToArray(), 0, sortedUnits, 0, army.DeadUnitsCount);
+
+            Warrior[] lancers = army.TakeAllAlive().Where(x => x is Lancer).ToArray();
 
             if (army.TakeAllAlive().OfType<Lancer>().Any())
             {
-                
-                Warrior[] lancers = army.TakeAllAlive().Where(x => x is Lancer).ToArray();
-                Array.Copy(lancers, 0, sortedUnits, unitsOffset, lancers.Length);
-                for (int i = 0; i < lancers.Length; i++)
-                {
-                    army.DropUnit(army.TakeAllAlive().FirstOrDefault(x => x is Lancer));
-                }
-                unitsOffset += lancers.Length;
+                sortedUnits[unitsOffset] = lancers[0];
+                unitsOffset++;
+                enotherOffset = 0;
             }
             else
             {
                 var firstUnit = army.TakeAllAlive().FirstOrDefault(x => x is not Healer && x is not Warlord);
                 
-                if(firstUnit is null)
+                if(firstUnit is not null)
                 {
-                    firstUnit = army.TakeAllAlive().OfType<Healer>().FirstOrDefault();
-
-                    if (firstUnit is null)
-                    {
-                        
-                        firstUnit = army.TakeAllAlive().OfType<Warlord>().FirstOrDefault();
-                    }
-                    else
-                    {
-                        healersOffset++;
-                    }
+                    enotherOffset = 1;
+                    sortedUnits[unitsOffset] = firstUnit;
+                    unitsOffset++;
                 }
-                unitsOffset ++;
-                sortedUnits[unitsOffset] = firstUnit;
-                //army.DropUnit(firstUnit);
-
             }
 
             Warrior[] healers = army.TakeAllAlive().OfType<Healer>().Skip(healersOffset).ToArray();
             Array.Copy(healers, 0, sortedUnits, unitsOffset, healers.Length);
             unitsOffset += healers.Length;
-            Warrior[] anotherUnits = army.TakeAllAlive().Select(x => x).Where(x => x is not Healer && x is not Warlord).ToArray();
-            Array.Copy(anotherUnits, 0, sortedUnits, unitsOffset, anotherUnits.Length);
-            sortedUnits[^1] = army.TakeAllAlive().FirstOrDefault(x => x is Warlord);
 
+            if(army.TakeAllAlive().Count(x => x is Lancer) > 1)
+            {
+                Array.Copy(lancers, 1, sortedUnits, unitsOffset, lancers.Length - 1);
+                unitsOffset += lancers.Length - 1;
+            }
+
+            Warrior[] anotherUnits = army.TakeAllAlive().Select(x => x).Where(x => x is not Healer && x is not Warlord && x is not Lancer).ToArray();
+            Array.Copy(anotherUnits, enotherOffset, sortedUnits, unitsOffset, anotherUnits.Length - enotherOffset);
+            
+            sortedUnits[^1] = army.TakeAllAlive().FirstOrDefault(x => x is Warlord);
             return sortedUnits.ToList();
         }
     }

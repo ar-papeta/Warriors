@@ -55,16 +55,21 @@ namespace Warriors
                 var secondUnit = secondArmy.TakeFirstAlive();
 
                 int round = 1;
+                Console.WriteLine(firstUnit.GetType());
+                Console.WriteLine(secondUnit.GetType());
                 while (firstUnit.IsAlive && secondUnit.IsAlive)
                 {
                     if (round % 2 != 0)
                     {
                         firstArmy.Attack(secondArmy);
-                        
+                        Console.Write(round + "r: " + firstUnit.Health + "  ");
+                        Console.WriteLine(secondUnit.Health + "  ");
                     }
                     else
                     {
                         secondArmy.Attack(firstArmy);
+                        Console.Write(round + "r: " + firstUnit.Health + "  ");
+                        Console.WriteLine(secondUnit.Health + "  ");
                     }
                     
                     round++;
@@ -86,15 +91,22 @@ namespace Warriors
         {
             while (firstArmy.IsAlive && secondArmy.IsAlive)
             {
+                
                 var armyPairs = firstArmy.TakeAllAlive().Zip(secondArmy.TakeAllAlive());
                 foreach (var (First, Second) in armyPairs)
                 {
                     Console.WriteLine(First.GetType());
                     Console.WriteLine(Second.GetType());
-                    Fight(First, Second);
+                    bool res = Fight(First, Second);
+                    if (res)
+                    {
+                        secondArmy.MoveUnits();
+                    }
+                    else
+                    {
+                        firstArmy.MoveUnits();
+                    }
                 }
-                firstArmy.MoveUnits();
-                secondArmy.MoveUnits();
             }
             return firstArmy.IsAlive;
         }

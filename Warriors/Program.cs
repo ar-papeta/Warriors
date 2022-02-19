@@ -15,18 +15,20 @@ namespace Warriors
         }
         static void Main(string[] args)
         {
-            Army army5 = new();
-
-            army5.AddUnits<Warrior>(2);
-            army5.AddUnits<Knight>(3);
-            //army5.AddUnits<Lancer>(3);
-            army5.AddUnits<Defender>(1);
-            army5.AddUnits<Healer>(3);
-            army5.AddUnits<Warlord>(1);
-            
-            army5.MoveUnits();
-
-            Console.WriteLine(army5);
+            Army army1 = new();
+            Army army2 = new();
+            army1.AddUnits<Warrior>(2);
+            army1.AddUnits<Lancer>(3);
+            army1.AddUnits<Defender>(1);
+            army1.AddUnits<Warlord>(1);
+            army2.AddUnits<Warlord>(5);
+            army2.AddUnits<Vampire>(1);
+            army2.AddUnits<Rookie>(1);
+            army2.AddUnits<Knight>(1);
+            army1.MoveUnits();
+            army2.MoveUnits();
+            BattleGround.StraightFight(army1, army2);
+            //Console.WriteLine(army1);
         }
     }
 }

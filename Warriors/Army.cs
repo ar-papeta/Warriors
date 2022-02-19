@@ -10,11 +10,6 @@ namespace Warriors
     {
         private List<Warrior> _army;
 
-        public void DropUnit(Warrior unit)
-        {
-            _army.Remove(unit);
-        }
-
         private int _lastDeadUnitsCount;
         
         public Warrior this[int i] => _army.Where(w => w.IsAlive).Skip(i).FirstOrDefault();
@@ -66,7 +61,7 @@ namespace Warriors
             bool HasNewDead = _lastDeadUnitsCount != DeadUnitsCount;
             if (HasNewDead)
             {
-                _lastDeadUnitsCount = AliveUnitsCount;
+                _lastDeadUnitsCount = DeadUnitsCount;
             }
             return HasNewDead;
         }

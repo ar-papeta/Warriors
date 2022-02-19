@@ -36,8 +36,8 @@ namespace Warriors.Tests
             army1.AddUnits<Healer>(2);
             army2.AddUnits<Warlord>(1);
             army2.AddUnits<Vampire>(1);
-            army1.AddUnits<Healer>(2);
-            army1.AddUnits<Knight>(2);
+            army2.AddUnits<Healer>(2);
+            army2.AddUnits<Knight>(2);
             army1.MoveUnits();
             army2.MoveUnits();
 
@@ -99,6 +99,8 @@ namespace Warriors.Tests
             army2.AddUnits<Vampire>(1);
             army2.AddUnits<Rookie>(1);
             army2.AddUnits<Knight>(1);
+            army1[0].EquipWeapon(SecretShop.Sword());
+            army2[0].EquipWeapon(SecretShop.Shield());
             army1.MoveUnits();
             army2.MoveUnits();
 
