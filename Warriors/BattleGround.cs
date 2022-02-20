@@ -16,15 +16,20 @@ namespace Warriors
             int round = 1;
             while(first.IsAlive && second.IsAlive)
             {
+                
+                
+
                 if (round % 2 != 0)
                 {
                     first.DealDamage(second, first.Attack);
+                    first.Regeneration();
                     Console.Write(round + "r: " +first.Health + "  ");
                     Console.WriteLine(second.Health + "  ");
                 }
                 else
                 {
                     second.DealDamage(first, second.Attack);
+                    second.Regeneration();
                     Console.Write(round + "r: " + first.Health + "  ");
                     Console.WriteLine(second.Health + "  ");
 

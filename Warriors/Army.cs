@@ -74,6 +74,7 @@ namespace Warriors
 
             HealArmy();
 
+            RegenerateArmy();
         }
 
         private void HealArmy()
@@ -112,5 +113,15 @@ namespace Warriors
             }
             return str.ToString();
         }
+
+        private void RegenerateArmy()
+        {
+            foreach (var unit in TakeAllAlive())
+            {
+                unit.Regeneration();
+            }
+        }
+
+        
     }
 }

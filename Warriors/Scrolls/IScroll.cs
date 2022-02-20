@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Warriors
+namespace Warriors.Scrolls
 {
-    public enum UnitType
+    public interface IScroll
     {
-        Warrior,
-        Knight,
-        Defender,
-        Vampire,
+        void CallOfGod(Warrior unitSummoner);
     }
 }
