@@ -90,7 +90,6 @@ namespace Warriors
         public virtual void Reincarnation()
         {
             Health = MaxHealth / 2;
-            Attack /= 2;
         }
 
         protected virtual void EquipmentChanged(object sender, NotifyCollectionChangedEventArgs e)

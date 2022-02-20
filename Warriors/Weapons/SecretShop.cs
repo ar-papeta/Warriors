@@ -59,7 +59,7 @@ namespace Warriors.Weapons
         {
             return Weapon.Builder()
                          .Health(-30)
-                         .Attack(10)
+                         .Attack(11)
                          .Build();
         }
 

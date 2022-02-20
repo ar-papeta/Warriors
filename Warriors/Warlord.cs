@@ -10,9 +10,8 @@ namespace Warriors
     public class Warlord : Defender
     {
         private int _lastReincarnationCounter;
-        private static readonly int ReincarnetionCalldown = 5;
+        private static readonly int ReincarnetionCalldown = 3;
 
-        private List<IScroll> scrolls;
         public Warlord()
         {
             Defense = 2;
@@ -28,14 +27,15 @@ namespace Warriors
         {
             if (DeathGodPower)
             {
-                var unit = army.TakeAllDead().FirstOrDefault();
-                if(unit is not null && unit is not Vampire)
+                var unit = army.TakeAllDead().FirstOrDefault(unit => unit is not Vampire);
+                if(unit is not null)
                 {
                     if(_lastReincarnationCounter > ReincarnetionCalldown)
                     {
                         _lastReincarnationCounter = 1;
-                        TakeDamage(5);
+                        TakeDamage(7);
                         unit.Reincarnation();
+                       
                         Console.WriteLine($"Reincarnetion of \n {unit}");
                     }
                     else
