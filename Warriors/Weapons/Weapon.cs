@@ -24,7 +24,7 @@ namespace Warriors.Weapons
         public int Defense { get; private set; }
 
         /// <value>
-        /// Increase the soldier’s vampirism to this number
+        /// Increase the vampire’s vampirism on this number
         /// </value>
         public int Vampirism { get; private set; }
 
@@ -32,6 +32,11 @@ namespace Warriors.Weapons
         /// Increase the amount of health which the healer restore for the allied unit 
         /// </value>
         public int HealPower { get; private set; }
+
+        /// <value>
+        /// Increase health regeneration for unit 
+        /// </value>
+        public int HpRegen { get; private set; }
 
         private Weapon() { }
 
@@ -62,6 +67,12 @@ namespace Warriors.Weapons
             public IWeaponBuilder Attack(int attack)
             {
                 _result.Attack = attack;
+                return this;
+            }
+
+            public IWeaponBuilder HpRegen(int hpRegen)
+            {
+                _result.HpRegen = hpRegen;
                 return this;
             }
 

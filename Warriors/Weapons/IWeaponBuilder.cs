@@ -10,6 +10,8 @@ namespace Warriors.Weapons
     {
         IWeaponBuilder Health(int health);
 
+        IWeaponBuilder HpRegen(int hpRegen);
+
         IWeaponBuilder Attack(int attack);
 
         IWeaponBuilder Defense(int defense);

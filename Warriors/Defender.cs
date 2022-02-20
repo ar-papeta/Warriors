@@ -34,6 +34,12 @@ namespace Warriors
             return realDamage;
         }
 
+        public override void Reincarnation()
+        {
+            base.Reincarnation();
+            Defense = 0;
+        }
+
         protected override void EquipmentChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             base.EquipmentChanged(sender, e);

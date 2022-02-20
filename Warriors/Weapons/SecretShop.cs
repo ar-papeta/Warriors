@@ -8,6 +8,7 @@ namespace Warriors.Weapons
 {
     public static class SecretShop
     {
+
         public static Weapon Sword()
         {
             return Weapon.Builder()
@@ -53,5 +54,23 @@ namespace Warriors.Weapons
                          .HealPower(3)
                          .Build();
         }
-    }
+
+        public static Weapon GodBlade()
+        {
+            return Weapon.Builder()
+                         .Health(-30)
+                         .Attack(10)
+                         .Build();
+        }
+
+        public static Weapon RingOfRegen()
+        {
+            return Weapon.Builder()
+                         .Health(10)
+                         .Attack(-1)
+                         .HpRegen(1)
+                         .HealPower(1)
+                         .Build();
+        }
+    }  
 }

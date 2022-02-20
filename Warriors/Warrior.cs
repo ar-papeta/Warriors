@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using Warriors.Weapons;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using Warriors.Scrolls;
 
 namespace Warriors
 {
     public class Warrior
     {
-        protected readonly ObservableCollection<Weapon> equipment;
+        protected readonly ObservableCollection<Weapon> Equipment;
+
         /// <value>
         /// Warrior's base health points 
         /// </value>
@@ -28,6 +30,11 @@ namespace Warriors
         public int Attack { get; protected set; }
 
         /// <value>
+        /// Warrior's base hp regeneration (0 by default) 
+        /// </value>
+        public int HpRegeneration { get; protected set; }
+
+        /// <value>
         /// If warrior's HP is greater than 0 return true otherwise false
         /// </value>
         public bool IsAlive => Health > 0;
@@ -37,9 +44,8 @@ namespace Warriors
             Attack = 5;
             MaxHealth = 50;
             Health = MaxHealth;
-            equipment = new();
-            equipment.CollectionChanged += EquipmentChanged;
-
+            Equipment = new();
+            Equipment.CollectionChanged += EquipmentChanged;
         }
         public virtual int TakeDamage(int damage)
         {
@@ -73,7 +79,18 @@ namespace Warriors
         
         public virtual void EquipWeapon(Weapon weapon)
         {
-            equipment.Add(weapon);
+            Equipment.Add(weapon);
+        }
+
+        public virtual void Regeneration()
+        {
+            Health = Math.Clamp(Health + HpRegeneration, 0, MaxHealth);
+        }
+
+        public virtual void Reincarnation()
+        {
+            Health = MaxHealth / 2;
+            Attack /= 2;
         }
 
         protected virtual void EquipmentChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -86,6 +103,7 @@ namespace Warriors
                         Attack = Math.Max(Attack + nw.Attack, 0);
                         Health = Math.Max(Health + nw.Health, 0);
                         MaxHealth = Math.Max(MaxHealth + nw.Health, 0);
+                        HpRegeneration += nw.HpRegen;
                         Console.WriteLine($"Add {nw}");
                     }
                     break;
@@ -96,11 +114,18 @@ namespace Warriors
                         Attack = Math.Max(Attack - ow.Attack, 0);
                         Health = Math.Max(Health - ow.Health, 0);
                         MaxHealth = Math.Max(MaxHealth - ow.Health, 0);
+                        HpRegeneration += ow.HpRegen;
                         Console.WriteLine($"Удален {ow}");
                     }
                     break;
             }
         }
+
+        public void ReadScroll(IScroll scroll)
+        {
+            scroll.CallOfGod(this);
+        }
+
         public override string ToString()
         {
             return $"Warrior {GetType()}\n" +

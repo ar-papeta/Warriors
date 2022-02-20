@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Warriors.Weapons;
+using Warriors.Scrolls;
 
 namespace Warriors
 {
@@ -15,20 +16,19 @@ namespace Warriors
         }
         static void Main(string[] args)
         {
-            Army army1 = new();
-            Army army2 = new();
-            army1.AddUnits<Warrior>(2);
-            army1.AddUnits<Lancer>(3);
-            army1.AddUnits<Defender>(1);
-            army1.AddUnits<Warlord>(1);
-            army2.AddUnits<Warlord>(5);
-            army2.AddUnits<Vampire>(1);
-            army2.AddUnits<Rookie>(1);
-            army2.AddUnits<Knight>(1);
-            army1.MoveUnits();
-            army2.MoveUnits();
-            BattleGround.StraightFight(army1, army2);
-            //Console.WriteLine(army1);
+            Army a1 = new();
+            a1.AddUnits<Warlord>(1);
+            a1.AddUnits<Warrior>(7);
+            a1[0].ReadScroll(new DeathGodScroll());
+            a1[1].ReadScroll(new HealGodScroll());
+            Army a2 = new();
+            a2.AddUnits<Warlord>(1);
+            a2[0].EquipWeapon(SecretShop.Sword());
+            a2[0].EquipWeapon(SecretShop.Sword());
+            a2[0].EquipWeapon(SecretShop.Sword());
+            a2[0].EquipWeapon(SecretShop.Sword());
+            a2[0].EquipWeapon(SecretShop.Sword());
+            BattleGround.Fight(a1, a2);
         }
     }
 }
