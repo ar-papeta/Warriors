@@ -128,8 +128,8 @@ namespace Warriors
         public override string ToString()
         {
             return $"Warrior {GetType()}\n" +
-                   $"  Health: {Health}\n"  +
-                   $"  Attack: {Attack}\n";
+                   $"\tHealth: {Health}\n"  +
+                   $"\tAttack: {Attack}\n";
         }
     }
 }

@@ -70,7 +70,7 @@ namespace Warriors
         public override string ToString()
         {
             return base.ToString()  + 
-                   $"  vampirism: {Vampirism}";
+                   $"\tvampirism: {Vampirism}";
         }
     }
 }

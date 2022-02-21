@@ -57,5 +57,11 @@ namespace Warriors
                     break;
             }
         }
+
+        public override string ToString()
+        {
+            return base.ToString() +
+                   $"\tHeal power: {HealPower}";
+        }
     }
 }

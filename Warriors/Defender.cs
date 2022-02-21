@@ -63,7 +63,7 @@ namespace Warriors
         public override string ToString()
         {
             return base.ToString() +
-                   $"  Defense: {Defense}\n";
+                   $"\tDefense: {Defense}\n";
         }
     }
 }
