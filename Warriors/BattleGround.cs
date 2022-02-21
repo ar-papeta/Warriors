@@ -69,6 +69,7 @@ namespace Warriors
             }
             var winner = firstArmy.IsAlive ? firstArmy : secondArmy;
             Log.LogInfo($"Fight end , winner is {winner}");
+
             return firstArmy.IsAlive;
         }
 
@@ -118,7 +119,7 @@ namespace Warriors
 
                 var armyPairs = firstArmy.TakeAllAlive().Zip(secondArmy.TakeAllAlive());
 
-                var result = Parallel.ForEach<(Warrior, Warrior)>(
+                Parallel.ForEach<(Warrior, Warrior)>(
                     armyPairs,
                     x =>
                     {
@@ -138,6 +139,7 @@ namespace Warriors
             }
             var winner = firstArmy.IsAlive ? firstArmy : secondArmy;
             Log.LogInfo($"Fight end , winner is {winner}");
+
             return firstArmy.IsAlive;
         }
 
