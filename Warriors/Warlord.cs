@@ -42,12 +42,8 @@ namespace Warriors
                     {
                         _lastReincarnationCounter++;
                     }
-                   
                 }
-                
-
             }
-
         }
 
         public List<Warrior> MoveUnits(Army army)

@@ -109,7 +109,7 @@ namespace Warriors
             str.Append($"Army has units: \n");
             foreach (var unit in TakeAllAlive())
             {
-                str.Append($"{i++}: {unit.GetType()} \n");
+                str.Append($"\t{i++}: {unit} \n");
             }
             return str.ToString();
         }

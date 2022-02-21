@@ -1,8 +1,10 @@
-﻿using System;
+﻿using BenchmarkDotNet.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Warriors.Loger;
 using Warriors.Validation;
 
 namespace Warriors
@@ -16,27 +18,21 @@ namespace Warriors
             int round = 1;
             while(first.IsAlive && second.IsAlive)
             {
-                
-                
-
                 if (round % 2 != 0)
                 {
                     first.DealDamage(second, first.Attack);
                     first.Regeneration();
-                    Console.Write(round + "r: " +first.Health + "  ");
-                    Console.WriteLine(second.Health + "  ");
                 }
                 else
                 {
                     second.DealDamage(first, second.Attack);
                     second.Regeneration();
-                    Console.Write(round + "r: " + first.Health + "  ");
-                    Console.WriteLine(second.Health + "  ");
-
                 }
+                Log.LogDebug($"\t\t{round}r:\t{first.Health}\t{second.Health}");
                 round++;
             }
-            Console.WriteLine("---end---");
+            var winner = first.IsAlive ? first : second;
+            Log.LogInfo($"Fight end , winner is {winner}");
             return first.IsAlive;
         }
 
@@ -47,31 +43,33 @@ namespace Warriors
             PrepareArmy(firstArmy);
             PrepareArmy(secondArmy);
 
+            Log.LogInfo($"\nStart fight army : First {firstArmy} Second {secondArmy}");
+
             while (firstArmy.IsAlive && secondArmy.IsAlive)
             {
                 var firstUnit = firstArmy.TakeFirstAlive();
                 var secondUnit = secondArmy.TakeFirstAlive();
 
+                Log.LogDebug($"Start fight: {firstUnit.GetType()} vs {secondUnit.GetType()}");
+
                 int round = 1;
-                Console.WriteLine(firstUnit.GetType());
-                Console.WriteLine(secondUnit.GetType());
                 while (firstUnit.IsAlive && secondUnit.IsAlive)
                 {
                     if (round % 2 != 0)
                     {
                         firstArmy.Attack(secondArmy);
-                        Console.Write(round + "r: " + firstUnit.Health + "  ");
-                        Console.WriteLine(secondUnit.Health + "  ");
                     }
                     else
                     {
                         secondArmy.Attack(firstArmy);
-                        Console.Write(round + "r: " + firstUnit.Health + "  ");
-                        Console.WriteLine(secondUnit.Health + "  ");
                     }
+                    Log.LogDebug($"\t\t{round}r:\t{firstUnit.Health}\t{secondUnit.Health}");
                     round++;
                 }
             }
+            var winner = firstArmy.IsAlive ? firstArmy : secondArmy;
+            Log.LogInfo($"Fight end , winner is {winner}");
+
             return firstArmy.IsAlive;
         }
 
@@ -81,14 +79,17 @@ namespace Warriors
 
             PrepareArmy(firstArmy);
             PrepareArmy(secondArmy);
+
             while (firstArmy.IsAlive && secondArmy.IsAlive)
             {
                 
                 var armyPairs = firstArmy.TakeAllAlive().Zip(secondArmy.TakeAllAlive());
+
                 foreach (var (First, Second) in armyPairs)
                 {
-                    Console.WriteLine(First.GetType());
-                    Console.WriteLine(Second.GetType());
+
+                    Log.LogInfo($"Start fight: {First.GetType()} vs {Second.GetType()}");
+
                     bool res = Fight(First, Second);
                     if (res)
                     {
@@ -100,6 +101,44 @@ namespace Warriors
                     }
                 }
             }
+            var winner = firstArmy.IsAlive ? firstArmy : secondArmy;
+            Log.LogInfo($"Fight end , winner is {winner}");
+
+            return firstArmy.IsAlive;
+        }
+
+        public static bool StraightFightParallel(Army firstArmy, Army secondArmy)
+        {
+            Validator.ValidateFight(firstArmy, secondArmy);
+
+            PrepareArmy(firstArmy);
+            PrepareArmy(secondArmy);
+
+            while (firstArmy.IsAlive && secondArmy.IsAlive)
+            {
+
+                var armyPairs = firstArmy.TakeAllAlive().Zip(secondArmy.TakeAllAlive());
+
+                Parallel.ForEach<(Warrior, Warrior)>(
+                    armyPairs,
+                    x =>
+                    {
+                        Log.LogInfo($"Start fight: {x.Item1.GetType()} vs {x.Item2.GetType()}");
+
+                        bool res = Fight(x.Item1, x.Item2);
+                        if (res)
+                        {
+                            secondArmy.MoveUnits();
+                        }
+                        else
+                        {
+                            firstArmy.MoveUnits();
+                        }
+                    }
+                    );
+            }
+            var winner = firstArmy.IsAlive ? firstArmy : secondArmy;
+            Log.LogInfo($"Fight end , winner is {winner}");
 
             return firstArmy.IsAlive;
         }

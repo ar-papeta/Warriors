@@ -49,7 +49,6 @@ namespace Warriors
             {
                 enemy.MoveUnits();
             }
-
         }
     }
 }

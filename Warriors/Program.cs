@@ -2,10 +2,25 @@
 using System.Linq;
 using Warriors.Weapons;
 using Warriors.Scrolls;
+using BenchmarkDotNet.Running;
+using BenchmarkDotNet.Attributes;
 
 namespace Warriors
 {
-    class Program
+    public class BenchyFight
+    {
+        [Benchmark]
+        public void BenchyFightTest()
+        {
+            Army army5 = new();
+            Army army6 = new();
+            //army5.AddUnits<Lancer>(100);
+            //army5[0].ReadScroll(new WarGodScroll());
+            //army6.AddUnits<Warrior>(200);
+            //return BattleGround.StraightFight(army5, army6);
+        }
+    }
+    public class Program
     {
         private class Rookie : Warrior
         {
@@ -14,6 +29,8 @@ namespace Warriors
                 Attack = 1;
             }
         }
+
+        
         static void Main(string[] args)
         {
             //Army a1 = new();
@@ -42,13 +59,15 @@ namespace Warriors
             //army2[0].ReadScroll(new DeathGodScroll());
             //BattleGround.Fight(army1, army2);
 
-            Army army5 = new();
-            Army army6 = new();
-            army5.AddUnits<Lancer>(1);
-            army5[0].ReadScroll(new WarGodScroll());
-            army6.AddUnits<Warrior>(1);
-            army6.AddUnits<Warrior>(1);
-            BattleGround.Fight(army5, army6);
+            //Army army5 = new();
+            //Army army6 = new();
+            //army5.AddUnits<Lancer>(12);
+            //army5[0].ReadScroll(new WarGodScroll());
+            //army6.AddUnits<Warrior>(24);
+            //BattleGround.StraightFight(army5, army6);
+
+            //var summary = BenchmarkRunner.Run<BenchyFight>();
+
         }
     }
 }
